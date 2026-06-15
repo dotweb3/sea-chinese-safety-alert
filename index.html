@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>东南亚与澳新中文安全预警</title>
+    <meta
+      name="description"
+      content="面向公众的中文安全预警 Web MVP，聚焦东南亚诱骗入园区/强迫犯罪，以及澳大利亚、新西兰中文社区诈骗风险。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+
+    <header class="app-header">
+      <div class="header-copy">
+        <p class="eyebrow">公众安全预警 · 公开来源 + 人工审核</p>
+        <h1>东南亚与澳新中文安全预警</h1>
+        <p>
+          聚焦高薪招聘诱骗、跨境失联、园区强迫犯罪、假冒权威、虚拟绑架、
+          投资/加密诈骗与 AI 深伪社工风险。
+        </p>
+      </div>
+      <div class="header-actions" aria-label="快速操作">
+        <button class="button danger" data-jump="help">紧急求助</button>
+        <button class="button secondary" data-jump="report">提交线索</button>
+      </div>
+    </header>
+
+    <nav class="app-nav" aria-label="主导航">
+      <button class="nav-item active" data-view="dashboard">总览</button>
+      <button class="nav-item" data-view="map">风险地图</button>
+      <button class="nav-item" data-view="tactics">套路库</button>
+      <button class="nav-item" data-view="help">求助清单</button>
+      <button class="nav-item" data-view="subscribe">订阅</button>
+      <button class="nav-item" data-view="report">报料</button>
+      <button class="nav-item" data-view="admin">编辑台</button>
+    </nav>
+
+    <main id="main" class="app-main">
+      <section id="dashboard" class="view active" aria-labelledby="dashboard-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Dashboard</p>
+            <h2 id="dashboard-title">今日重点</h2>
+          </div>
+          <p class="muted" id="last-updated"></p>
+        </div>
+
+        <div class="metric-grid" id="metric-grid"></div>
+
+        <div class="dashboard-grid">
+          <section class="panel focus-panel" aria-labelledby="focus-title">
+            <div class="panel-heading">
+              <h3 id="focus-title">重点预警</h3>
+              <span class="pill danger">人工审核后发布</span>
+            </div>
+            <div id="focus-alerts" class="alert-list"></div>
+          </section>
+
+          <section class="panel map-panel" aria-labelledby="map-preview-title">
+            <div class="panel-heading">
+              <h3 id="map-preview-title">国家/地区风险</h3>
+              <span class="pill">7 个重点地区</span>
+            </div>
+            <div class="region-visual" id="region-visual" aria-label="区域风险示意图"></div>
+          </section>
+
+          <section class="panel" aria-labelledby="new-tactics-title">
+            <div class="panel-heading">
+              <h3 id="new-tactics-title">最新套路</h3>
+              <button class="text-button" data-jump="tactics">查看全部</button>
+            </div>
+            <div id="latest-tactics" class="compact-list"></div>
+          </section>
+
+          <section class="panel urgent-panel" aria-labelledby="urgent-title">
+            <div class="panel-heading">
+              <h3 id="urgent-title">快速求助</h3>
+              <button class="text-button" data-jump="help">打开清单</button>
+            </div>
+            <div id="quick-help" class="quick-help"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="map" class="view" aria-labelledby="map-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Risk Map</p>
+            <h2 id="map-title">风险地图</h2>
+          </div>
+          <div class="control-row" role="group" aria-label="风险等级筛选">
+            <button class="chip active" data-map-filter="all">全部</button>
+            <button class="chip" data-map-filter="紧急避险">紧急避险</button>
+            <button class="chip" data-map-filter="高风险">高风险</button>
+            <button class="chip" data-map-filter="风险上升">风险上升</button>
+          </div>
+        </div>
+        <div class="map-layout">
+          <section class="panel">
+            <div class="large-map" id="large-map" aria-label="东南亚与澳新风险分布"></div>
+          </section>
+          <section class="region-list" id="region-list" aria-label="地区风险列表"></section>
+        </div>
+      </section>
+
+      <section id="tactics" class="view" aria-labelledby="tactics-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Modus Operandi</p>
+            <h2 id="tactics-title">套路库</h2>
+          </div>
+          <label class="search-box">
+            <span>搜索</span>
+            <input id="tactics-search" type="search" placeholder="输入地区、对象、风险词" />
+          </label>
+        </div>
+        <div class="filter-bar" id="tactics-filters"></div>
+        <div class="tactic-grid" id="tactic-grid"></div>
+      </section>
+
+      <section id="help" class="view" aria-labelledby="help-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Emergency</p>
+            <h2 id="help-title">紧急求助清单</h2>
+          </div>
+          <p class="muted">紧急危险先联系所在地报警/急救，再联系领事保护或本地反诈渠道。</p>
+        </div>
+        <div class="help-grid" id="help-grid"></div>
+        <section class="panel checklist-panel" aria-labelledby="safe-steps-title">
+          <h3 id="safe-steps-title">两步判断</h3>
+          <div class="step-grid">
+            <article>
+              <span class="step-number">1</span>
+              <h4>有人身危险或失联风险</h4>
+              <p>立即联系当地警方、急救或可信亲友，保留最后位置、航班、聊天记录和转账信息。</p>
+            </article>
+            <article>
+              <span class="step-number">2</span>
+              <h4>涉及中国公民海外权益</h4>
+              <p>同步联系 12308 或驻当地使领馆；如果在澳新，另向本地警方/Scamwatch/Netsafe 等渠道报案。</p>
+            </article>
+          </div>
+        </section>
+      </section>
+
+      <section id="subscribe" class="view" aria-labelledby="subscribe-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Subscription</p>
+            <h2 id="subscribe-title">订阅提醒</h2>
+          </div>
+          <p class="muted">MVP 先保存到本机浏览器，后续可接邮件、短信、微信服务号或 App 推送。</p>
+        </div>
+        <form id="subscribe-form" class="form-grid panel">
+          <fieldset>
+            <legend>关注地区</legend>
+            <div class="checkbox-grid" id="region-checkboxes"></div>
+          </fieldset>
+          <fieldset>
+            <legend>关注人群</legend>
+            <div class="checkbox-grid" id="audience-checkboxes"></div>
+          </fieldset>
+          <label>
+            提醒频率
+            <select name="frequency">
+              <option value="urgent">只接收高风险和紧急避险</option>
+              <option value="weekly">每周摘要</option>
+              <option value="monthly">每月报告</option>
+            </select>
+          </label>
+          <label>
+            联系方式备注
+            <input name="contact" type="text" placeholder="例如：邮箱/社群名，MVP 不会对外发送" />
+          </label>
+          <button class="button primary" type="submit">保存订阅偏好</button>
+          <p class="form-status" id="subscribe-status" role="status"></p>
+        </form>
+      </section>
+
+      <section id="report" class="view" aria-labelledby="report-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Community Intake</p>
+            <h2 id="report-title">提交线索</h2>
+          </div>
+          <p class="muted">所有线索默认不公开，进入审核池。请尽量脱敏，不填写无关个人信息。</p>
+        </div>
+        <form id="report-form" class="report-layout">
+          <section class="panel form-grid">
+            <label>
+              线索标题
+              <input name="title" required maxlength="80" placeholder="例如：曼谷转机后被诱导去边境工作" />
+            </label>
+            <label>
+              涉及地区
+              <select name="region" required id="report-region"></select>
+            </label>
+            <label>
+              风险类型
+              <select name="category" required id="report-category"></select>
+            </label>
+            <label>
+              情况摘要
+              <textarea name="summary" required rows="6" placeholder="写事实、时间、地点、平台、已采取行动；请删去身份证号、精确住址、完整手机号等。"></textarea>
+            </label>
+            <label class="checkbox-line">
+              <input type="checkbox" name="consent" required />
+              我确认该线索可进入内部审核池，公开前必须脱敏和复核。
+            </label>
+            <button class="button primary" type="submit">提交到审核池</button>
+            <p class="form-status" id="report-status" role="status"></p>
+          </section>
+          <aside class="panel privacy-panel">
+            <h3>脱敏提示</h3>
+            <p id="privacy-tip">输入摘要后，这里会提示是否可能包含个人信息。</p>
+            <ul>
+              <li>不要公开护照、身份证、完整手机号、住址、银行卡。</li>
+              <li>不要写未经核实的个人指控或精确定位。</li>
+              <li>紧急危险优先报警，不要等平台回复。</li>
+            </ul>
+          </aside>
+        </form>
+      </section>
+
+      <section id="admin" class="view" aria-labelledby="admin-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Editorial Console</p>
+            <h2 id="admin-title">编辑台</h2>
+          </div>
+          <p class="muted">原型为本地编辑台，模拟人工审核、来源归档、标签和多语言字段。</p>
+        </div>
+
+        <div class="admin-grid">
+          <section class="panel" aria-labelledby="admin-add-title">
+            <h3 id="admin-add-title">人工录入预警</h3>
+            <form id="admin-alert-form" class="form-grid">
+              <label>
+                标题
+                <input name="title" required maxlength="90" />
+              </label>
+              <label>
+                地区
+                <select name="region" id="admin-region"></select>
+              </label>
+              <label>
+                风险类型
+                <select name="category" id="admin-category"></select>
+              </label>
+              <label>
+                预警等级
+                <select name="level">
+                  <option>信息关注</option>
+                  <option>风险上升</option>
+                  <option>高风险</option>
+                  <option>紧急避险</option>
+                </select>
+              </label>
+              <label>
+                审核状态
+                <select name="status">
+                  <option value="draft">草稿</option>
+                  <option value="review">待审核</option>
+                  <option value="published">已发布</option>
+                </select>
+              </label>
+              <label>
+                简中摘要
+                <textarea name="summary" required rows="4"></textarea>
+              </label>
+              <label>
+                繁中/英文/本地语占位
+                <input name="languages" placeholder="zh-Hant,en,th,my,km" />
+              </label>
+              <button class="button primary" type="submit">保存预警</button>
+            </form>
+          </section>
+
+          <section class="panel" aria-labelledby="review-title">
+            <div class="panel-heading">
+              <h3 id="review-title">审核池</h3>
+              <button class="text-button" id="clear-local">清空本地演示数据</button>
+            </div>
+            <div id="review-queue" class="review-queue"></div>
+          </section>
+
+          <section class="panel source-panel" aria-labelledby="source-title">
+            <h3 id="source-title">来源归档</h3>
+            <div id="source-list" class="source-list"></div>
+          </section>
+
+          <section class="panel" aria-labelledby="report-preview-title">
+            <h3 id="report-preview-title">周报草稿</h3>
+            <div id="weekly-report" class="weekly-report"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="alert-dialog" class="alert-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-header">
+        <div>
+          <p class="eyebrow" id="dialog-meta"></p>
+          <h3 id="dialog-title"></h3>
+        </div>
+        <button class="icon-button" id="dialog-close" aria-label="关闭">×</button>
+      </div>
+      <div id="dialog-body"></div>
+    </dialog>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
