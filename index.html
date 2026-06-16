@@ -15,17 +15,48 @@
 
     <header class="app-header">
       <div class="header-copy">
-        <p class="eyebrow">公众安全预警 · 公开来源 + 人工审核</p>
+        <p class="eyebrow">公开安全情报台 · 人工审核发布</p>
         <h1>东南亚与澳新中文安全预警</h1>
         <p>
-          聚焦高薪招聘诱骗、跨境失联、园区强迫犯罪、假冒权威、虚拟绑架、
-          投资/加密诈骗与 AI 深伪社工风险。
+          给准备出行、求职、留学和海外家属看的风险信号台：先识别危险，再找到可信求助路径。
         </p>
+        <div class="header-actions" aria-label="快速操作">
+          <button class="button danger" data-jump="help">紧急求助</button>
+          <button class="button secondary" data-jump="report">提交线索</button>
+        </div>
       </div>
-      <div class="header-actions" aria-label="快速操作">
-        <button class="button danger" data-jump="help">紧急求助</button>
-        <button class="button secondary" data-jump="report">提交线索</button>
-      </div>
+
+      <aside class="signal-board" aria-label="公开风险信号带">
+        <div class="signal-board-top">
+          <span>Signal strip</span>
+          <strong>SEA / AUS / NZ</strong>
+        </div>
+        <div class="signal-route" aria-hidden="true">
+          <span class="route-node hot">缅</span>
+          <span class="route-line"></span>
+          <span class="route-node warn">柬</span>
+          <span class="route-line"></span>
+          <span class="route-node warn">泰</span>
+          <span class="route-line"></span>
+          <span class="route-node watch">澳</span>
+          <span class="route-line"></span>
+          <span class="route-node watch">新</span>
+        </div>
+        <dl class="signal-readout">
+          <div>
+            <dt>公开来源</dt>
+            <dd>8</dd>
+          </div>
+          <div>
+            <dt>种子预警</dt>
+            <dd>30</dd>
+          </div>
+          <div>
+            <dt>发布原则</dt>
+            <dd>防护导向</dd>
+          </div>
+        </dl>
+      </aside>
     </header>
 
     <nav class="app-nav" aria-label="主导航">

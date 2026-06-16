@@ -381,7 +381,7 @@ function renderMap(container, large = false) {
   const height = large ? 430 : 300;
   const dots = regions
     .map((region) => {
-      const fill = region.level === "紧急避险" ? "var(--red)" : region.level === "高风险" ? "var(--amber)" : "var(--blue)";
+      const fill = region.level === "紧急避险" ? "var(--vermilion)" : region.level === "高风险" ? "var(--signal)" : "var(--consular)";
       const cx = (region.x / 100) * width;
       const cy = (region.y / 100) * height;
       return `
@@ -715,6 +715,12 @@ function setupNavigation() {
 
   const initial = location.hash.replace("#", "");
   if (initial && $(`#${initial}`)) switchView(initial);
+
+  window.addEventListener("hashchange", () => {
+    const next = location.hash.replace("#", "");
+    const view = document.getElementById(next);
+    if (view?.classList.contains("view")) setView(next);
+  });
 }
 
 function setupEvents() {
