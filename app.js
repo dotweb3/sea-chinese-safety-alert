@@ -1,4 +1,4 @@
-const DATA_VERSION = "2026-06-15";
+const DATA_VERSION = "2026-06-22";
 
 const sources = [
   {
@@ -54,6 +54,15 @@ const sources = [
     credibility: "高",
     url: "https://www.scamwatch.gov.au/types-of-scams/threat-scams/chinese-authority-scams",
     note: "说明假冒中国权威机构、威胁逮捕/遣返、虚拟绑架等面向中文社区的诈骗。"
+  },
+  {
+    id: "vic-police-chinese-authority",
+    name: "Victoria Police：Fake authority scams targeting the Chinese community",
+    type: "澳大利亚警方",
+    date: "2025-02-06",
+    credibility: "高",
+    url: "https://www.police.vic.gov.au/scams-targeting-mandarin-speaking-community",
+    note: "面向普通话社区说明假冒权威、勒索和虚拟绑架风险，并建议通过独立渠道联系警方或官方机构。"
   },
   {
     id: "afp-2026-cambodia-script",
@@ -228,6 +237,7 @@ const helpContacts = [
 ];
 
 const seedAlerts = [
+  ["A-031", "维州中文社区假冒权威勒索预警", "australia", "假冒公检法/使领馆", "留学生", "高风险", "高", "2026-06-22", "澳大利亚维州警方提示，假冒权威骗局会针对普通话社区制造涉案、遣返或家人安全压力。", ["普通话自动语音或来电", "声称涉案或签证受影响", "要求绕开亲友和官方渠道"], ["挂断并独立查找官方联系方式", "联系学校/警方/银行核验", "如已转账立即报案并止付"], ["vic-police-chinese-authority", "scamwatch-chinese-authority"], [77, 94, 88]],
   ["A-001", "泰国入境后被要求改去边境工作", "thailand", "高薪招聘诱骗", "求职者", "高风险", "高", "2026-06-12", "高薪岗位承诺包机票食宿，落地后临时要求改去边境地区。", ["高薪轻松", "落地改行程", "签证用途不一致"], ["停止前往边境", "联系亲友共享位置", "拨打当地报警和 12308"], ["china-thailand-2026-job", "interpol-2025-scam-centres"], [78, 90, 86]],
   ["A-002", "妙瓦底相关海外招聘诱骗风险", "myanmar", "跨境失联", "求职者", "紧急避险", "高", "2026-06-10", "社交平台招聘后诱导非法越境，随后与家属联系中断。", ["要求偷渡", "中介催促", "工作地点含糊"], ["不要非法入境", "保存中介账号", "联系当地警方与使领馆"], ["china-myanmar-2025-fraud", "mps-2026-telecom-fraud"], [86, 95, 98]],
   ["A-003", "柬埔寨园区假客服岗位诱骗", "cambodia", "园区强迫犯罪", "求职者", "高风险", "高", "2026-06-08", "以客服、推广、跨境电商岗位名义招聘，到达后限制外出并要求从事诈骗。", ["统一住宿", "扣押证件", "高额离职赔偿"], ["拒绝交证件", "核验公司实体", "遇限制自由立即报警"], ["unodc-2025-inflection", "interpol-2025-scam-centres"], [82, 93, 94]],
