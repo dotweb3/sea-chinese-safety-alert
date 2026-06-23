@@ -1,4 +1,4 @@
-const DATA_VERSION = "2026-06-22";
+const DATA_VERSION = "2026-06-23";
 
 const sources = [
   {
@@ -81,6 +81,15 @@ const sources = [
     credibility: "高",
     url: "https://www.police.govt.nz/news/release/police-warning-over-new-phone-scam",
     note: "提醒华人社区和留学生警惕假领馆电话、索取个人信息并向家属勒索的假绑架骗局。"
+  },
+  {
+    id: "nz-police-105-fraud-scam-cyber",
+    name: "New Zealand Police：Fraud/Scam/Cyber online reporting",
+    type: "新西兰警方",
+    date: "访问 2026-06-23",
+    credibility: "高",
+    url: "https://www.police.govt.nz/use-105/fraud-scam-cyber",
+    note: "说明遭遇线上诈骗、欺诈、线上滥用或骚扰时，可通过 105 或在线向警方报告，并准备银行流水、邮件、短信等证据。"
   }
 ];
 
@@ -227,6 +236,12 @@ const helpContacts = [
     title: "紧急服务 / 非紧急警方",
     contact: "111 / 105",
     when: "紧急危险拨 111；非紧急诈骗或可疑来电可联系 105。"
+  },
+  {
+    region: "新西兰线上诈骗",
+    title: "105 Fraud/Scam/Cyber 在线报案",
+    contact: "105.police.govt.nz / 105",
+    when: "在新西兰遭遇网络诈骗、资金损失、线上骚扰或已受害时，保留银行、邮件、短信和社媒证据后向警方在线报案。"
   },
   {
     region: "金融止损",
