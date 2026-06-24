@@ -238,6 +238,21 @@
               情况摘要
               <textarea name="summary" required rows="6" placeholder="写事实、时间、地点、平台、已采取行动；请删去身份证号、精确住址、完整手机号等。"></textarea>
             </label>
+            <fieldset>
+              <legend>提交前检查</legend>
+              <label class="checkbox-line">
+                <input type="checkbox" name="precheck" value="redacted" required />
+                已删去身份证号、完整手机号、住址、银行卡等可识别个人信息。
+              </label>
+              <label class="checkbox-line">
+                <input type="checkbox" name="precheck" value="facts" required />
+                只保留事实、时间、地点、平台、已采取行动，不写未经核实的个人指控。
+              </label>
+              <label class="checkbox-line">
+                <input type="checkbox" name="precheck" value="urgent" required />
+                若有人身危险或失联风险，已优先报警、联系急救或可信亲友。
+              </label>
+            </fieldset>
             <label class="checkbox-line">
               <input type="checkbox" name="consent" required />
               我确认该线索可进入内部审核池，公开前必须脱敏和复核。

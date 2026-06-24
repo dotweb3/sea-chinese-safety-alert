@@ -1,4 +1,4 @@
-const DATA_VERSION = "2026-06-23";
+const DATA_VERSION = "2026-06-24";
 
 const sources = [
   {
@@ -624,6 +624,7 @@ function renderReviewQueue() {
                 <span class="pill">${escapeHtml(item.type)}</span>
                 <span class="pill ${item.status === "published" ? "blue" : "amber"}">${statusLabel(item.status)}</span>
                 ${item.needsRedaction ? `<span class="pill danger">需脱敏</span>` : ""}
+                ${item.reviewChecks?.length ? `<span class="pill blue">自检 ${item.reviewChecks.length}/3</span>` : ""}
               </div>
               <h4>${escapeHtml(item.title)}</h4>
               <p class="muted">${escapeHtml(item.summary)}</p>
@@ -816,6 +817,7 @@ function setupEvents() {
       summary: data.get("summary"),
       status: "review",
       createdAt: new Date().toISOString(),
+      reviewChecks: data.getAll("precheck"),
       needsRedaction: detectPii(data.get("summary"))
     };
     reports.push(report);
