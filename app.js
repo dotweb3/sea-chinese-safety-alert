@@ -1,4 +1,4 @@
-const DATA_VERSION = "2026-06-24";
+const DATA_VERSION = "2026-06-25";
 
 const sources = [
   {
@@ -209,42 +209,56 @@ const regions = [
 const helpContacts = [
   {
     region: "中国公民海外",
+    priority: "同步领保",
+    priorityTone: "blue",
     title: "外交部全球领事保护与服务应急热线",
     contact: "+86-10-12308 / +86-10-65612308",
     when: "涉及中国公民海外人身安全、证件、失联、被困等情况。"
   },
   {
     region: "泰国",
+    priority: "紧急先打",
+    priorityTone: "danger",
     title: "当地报警与旅游警察",
     contact: "191 / 1155",
     when: "在泰国遇人身危险、非法拘禁、旅游安全或中文协助需求。"
   },
   {
     region: "缅甸",
+    priority: "紧急先打",
+    priorityTone: "danger",
     title: "当地报警与驻缅使领馆保护电话",
     contact: "0095-199 / 0095-943209657",
     when: "疑似被诱骗至缅甸、偷渡、失联、限制自由。"
   },
   {
     region: "澳大利亚",
+    priority: "紧急先打",
+    priorityTone: "danger",
     title: "紧急服务 / Crime Stoppers / Scamwatch",
     contact: "000 / 1800 333 000 / scamwatch.gov.au",
     when: "紧急危险、假冒权威诈骗、虚拟绑架、资金已转出。"
   },
   {
     region: "新西兰",
+    priority: "紧急先打",
+    priorityTone: "danger",
     title: "紧急服务 / 非紧急警方",
     contact: "111 / 105",
     when: "紧急危险拨 111；非紧急诈骗或可疑来电可联系 105。"
   },
   {
     region: "新西兰线上诈骗",
+    priority: "非紧急报案",
+    priorityTone: "amber",
     title: "105 Fraud/Scam/Cyber 在线报案",
     contact: "105.police.govt.nz / 105",
     when: "在新西兰遭遇网络诈骗、资金损失、线上骚扰或已受害时，保留银行、邮件、短信和社媒证据后向警方在线报案。"
   },
   {
     region: "金融止损",
+    priority: "资金止损",
+    priorityTone: "violet",
     title: "银行与支付平台",
     contact: "立即冻结账户、争议交易、保留回执",
     when: "已转账、透露银行卡/验证码、安装远控软件或加密钱包被诱导。"
@@ -551,7 +565,10 @@ function renderHelp() {
     .map(
       (item) => `
         <article class="help-card">
-          <span class="pill">${escapeHtml(item.region)}</span>
+          <div class="meta-row">
+            <span class="pill ${escapeHtml(item.priorityTone)}">${escapeHtml(item.priority)}</span>
+            <span class="pill">${escapeHtml(item.region)}</span>
+          </div>
           <h3>${escapeHtml(item.title)}</h3>
           <p class="contact">${escapeHtml(item.contact)}</p>
           <p class="muted">${escapeHtml(item.when)}</p>
