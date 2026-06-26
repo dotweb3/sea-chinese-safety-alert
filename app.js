@@ -1,4 +1,4 @@
-const DATA_VERSION = "2026-06-25";
+const DATA_VERSION = "2026-06-26";
 
 const sources = [
   {
@@ -656,22 +656,42 @@ function statusLabel(status) {
   return { draft: "草稿", review: "待审核", published: "已发布" }[status] || "待审核";
 }
 
+function sourceFreshness(source) {
+  if (String(source.date).startsWith("访问")) {
+    return { label: "访问记录", tone: "violet" };
+  }
+
+  const match = String(source.date).match(/\d{4}-\d{2}-\d{2}/);
+  if (!match) return { label: "待复核", tone: "amber" };
+
+  const versionDate = new Date(`${DATA_VERSION}T00:00:00Z`);
+  const sourceDate = new Date(`${match[0]}T00:00:00Z`);
+  const ageDays = Math.round((versionDate - sourceDate) / 86400000);
+
+  if (ageDays < 0) return { label: "日期待核验", tone: "danger" };
+  if (ageDays <= 365) return { label: "近一年", tone: "blue" };
+  if (ageDays <= 1095) return { label: "需定期复核", tone: "amber" };
+  return { label: "历史案例", tone: "violet" };
+}
+
 function renderSources() {
   $("#source-list").innerHTML = sources
-    .map(
-      (source) => `
+    .map((source) => {
+      const freshness = sourceFreshness(source);
+      return `
         <article class="source-item">
           <div class="meta-row">
             <span class="pill">${escapeHtml(source.type)}</span>
             <span class="pill blue">${escapeHtml(source.credibility)}可信度</span>
             <span class="pill violet">${escapeHtml(source.date)}</span>
+            <span class="pill ${freshness.tone}">${escapeHtml(freshness.label)}</span>
           </div>
           <h4>${escapeHtml(source.name)}</h4>
           <p class="muted">${escapeHtml(source.note)}</p>
           <a href="${source.url}" target="_blank" rel="noreferrer">${source.url}</a>
         </article>
-      `
-    )
+      `;
+    })
     .join("");
 }
 
