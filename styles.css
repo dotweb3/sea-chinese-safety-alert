@@ -372,6 +372,7 @@ h4 {
 
 .view {
   display: none;
+  scroll-margin-top: 76px;
 }
 
 .view.active {
@@ -770,6 +771,58 @@ textarea {
   margin-bottom: 16px;
 }
 
+.triage-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  padding: 0;
+  margin: 0 0 16px;
+  list-style: none;
+}
+
+.triage-strip li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 3px 10px;
+  align-items: center;
+  min-height: 84px;
+  padding: 12px;
+  border: 1px solid rgba(22, 32, 28, 0.15);
+  border-radius: var(--radius);
+  background: rgba(251, 252, 248, 0.9);
+  box-shadow: var(--shadow-tight);
+}
+
+.triage-strip span {
+  display: grid;
+  place-items: center;
+  grid-row: 1 / span 2;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-weight: 700;
+}
+
+.triage-strip strong,
+.triage-strip em {
+  min-width: 0;
+}
+
+.triage-strip strong {
+  font-size: 0.94rem;
+  line-height: 1.25;
+}
+
+.triage-strip em {
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-style: normal;
+  line-height: 1.35;
+}
+
 .help-card {
   padding: 16px;
 }
@@ -968,6 +1021,7 @@ legend {
 
   .metric-grid,
   .tactic-grid,
+  .triage-strip,
   .help-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1007,6 +1061,7 @@ legend {
   .signal-readout,
   .metric-grid,
   .tactic-grid,
+  .triage-strip,
   .help-grid,
   .quick-help,
   .step-grid,
