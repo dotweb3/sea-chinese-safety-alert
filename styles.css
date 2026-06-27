@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@600;700&display=swap");
 
 :root {
   color-scheme: light;
@@ -43,7 +43,10 @@ body {
     var(--paper);
   color: var(--ink);
   font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
   line-height: 1.58;
+  text-rendering: optimizeLegibility;
 }
 
 button,
@@ -129,15 +132,15 @@ p {
 h1,
 h2 {
   font-family: "Noto Serif SC", "Songti SC", serif;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0;
 }
 
 h1 {
   max-width: 780px;
   margin-bottom: 14px;
-  font-size: clamp(2.45rem, 5.2vw, 5.35rem);
-  line-height: 1.03;
+  font-size: clamp(2.25rem, 4.6vw, 4.8rem);
+  line-height: 1.08;
 }
 
 h2 {
@@ -156,7 +159,7 @@ h3 {
 h4 {
   margin-bottom: 6px;
   font-size: 0.98rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .header-copy p:last-of-type {
@@ -241,7 +244,7 @@ h4 {
   color: var(--consular);
   font-family: "Noto Serif SC", serif;
   font-size: 1.35rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .route-node.hot {
@@ -280,7 +283,7 @@ h4 {
 .signal-readout dt {
   color: var(--muted);
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .signal-readout dd {
@@ -309,7 +312,7 @@ h4 {
   color: #fff;
   background: var(--ink);
   box-shadow: var(--shadow-tight);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .button.primary {
@@ -503,7 +506,7 @@ h4 {
   border: 1px solid rgba(22, 32, 28, 0.12);
   background: var(--surface);
   color: var(--ink);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .alert-list {
@@ -574,7 +577,7 @@ h4 {
 .map-label {
   fill: var(--ink);
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .map-sub {
@@ -637,7 +640,7 @@ h4 {
   border: 1px solid rgba(22, 32, 28, 0.14);
   background: rgba(251, 252, 248, 0.86);
   color: var(--ink-soft);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .chip.active {
@@ -707,7 +710,7 @@ label {
   display: grid;
   gap: 6px;
   color: var(--muted);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 input,
@@ -873,7 +876,7 @@ fieldset {
 
 legend {
   padding: 0 6px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .checkbox-grid {
@@ -900,7 +903,7 @@ legend {
   min-height: 24px;
   margin-bottom: 0;
   color: var(--jade);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .report-layout {
