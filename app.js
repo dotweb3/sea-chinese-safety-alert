@@ -1,4 +1,4 @@
-const DATA_VERSION = "2026-06-26";
+const DATA_VERSION = "2026-06-28";
 
 const sources = [
   {
