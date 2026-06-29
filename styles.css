@@ -839,6 +839,42 @@ textarea {
   word-break: break-word;
 }
 
+.evidence-panel {
+  margin-bottom: 16px;
+}
+
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.evidence-grid article {
+  min-width: 0;
+  padding-left: 12px;
+  border-left: 3px solid var(--consular);
+}
+
+.evidence-grid strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.evidence-grid p,
+.evidence-note {
+  margin-bottom: 0;
+}
+
+.evidence-grid p {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.evidence-note {
+  margin-top: 12px;
+}
+
 .step-grid,
 .report-layout,
 .admin-grid {
@@ -1025,7 +1061,8 @@ legend {
   .metric-grid,
   .tactic-grid,
   .triage-strip,
-  .help-grid {
+  .help-grid,
+  .evidence-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1066,6 +1103,7 @@ legend {
   .tactic-grid,
   .triage-strip,
   .help-grid,
+  .evidence-grid,
   .quick-help,
   .step-grid,
   .report-layout,
