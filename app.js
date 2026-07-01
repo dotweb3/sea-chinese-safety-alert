@@ -640,6 +640,7 @@ function renderReviewQueue() {
               <div class="meta-row">
                 <span class="pill">${escapeHtml(item.type)}</span>
                 <span class="pill ${item.status === "published" ? "blue" : "amber"}">${statusLabel(item.status)}</span>
+                ${item.needsUrgentHelp ? `<span class="pill danger">先求助</span>` : ""}
                 ${item.needsRedaction ? `<span class="pill danger">需脱敏</span>` : ""}
                 ${item.reviewChecks?.length ? `<span class="pill blue">自检 ${item.reviewChecks.length}/3</span>` : ""}
               </div>
@@ -836,31 +837,33 @@ function setupEvents() {
   });
 
   $("#report-form").summary.addEventListener("input", (event) => {
-    const needsRedaction = detectPii(event.target.value);
-    $("#privacy-tip").textContent = needsRedaction
-      ? "检测到可能的手机号、邮箱、证件或住址信息。提交前建议先打码。"
-      : "暂未检测到明显个人敏感信息。仍建议只保留必要事实。";
+    $("#privacy-tip").textContent = reportGuidance(event.target.value);
   });
 
   $("#report-form").addEventListener("submit", (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
+    const summary = String(data.get("summary") || "");
+    const needsUrgentHelp = detectUrgency(summary);
     const report = {
       id: `R-${Date.now()}`,
       title: data.get("title"),
       regionId: data.get("region"),
       category: data.get("category"),
-      summary: data.get("summary"),
+      summary,
       status: "review",
       createdAt: new Date().toISOString(),
       reviewChecks: data.getAll("precheck"),
-      needsRedaction: detectPii(data.get("summary"))
+      needsRedaction: detectPii(summary),
+      needsUrgentHelp
     };
     reports.push(report);
     saveLocal("reports", reports);
     form.reset();
-    $("#report-status").textContent = "已进入本地审核池，默认不会公开。";
+    $("#report-status").textContent = needsUrgentHelp
+      ? "已进入本地审核池。若仍有人身危险或失联风险，请先报警、联系 12308/使领馆或可信亲友。"
+      : "已进入本地审核池，默认不会公开。";
     $("#privacy-tip").textContent = "输入摘要后，这里会提示是否可能包含个人信息。";
     renderReviewQueue();
   });
@@ -920,6 +923,24 @@ function detectPii(text) {
     /(护照|身份证|住址|银行卡|微信号|passport|address|bank card)/i
   ];
   return patterns.some((pattern) => pattern.test(text));
+}
+
+function detectUrgency(text) {
+  const patterns = [
+    /(失联|联系不上|被困|被关|被控制|限制自由|非法拘禁|扣押护照|护照被收|被打|威胁|求救|赎金|转账赎人|偷渡|被迫)/,
+    /(urgent|kidnap|kidnapped|detained|passport\s*taken|missing)/i
+  ];
+  return patterns.some((pattern) => pattern.test(text));
+}
+
+function reportGuidance(text) {
+  if (detectUrgency(text)) {
+    return "摘要可能涉及人身危险、失联或被控制。请先报警、联系 12308/使领馆或可信亲友；不要为了补材料继续配合对方。";
+  }
+
+  return detectPii(text)
+    ? "检测到可能的手机号、邮箱、证件或住址信息。提交前建议先打码。"
+    : "暂未检测到明显个人敏感信息。仍建议只保留必要事实。";
 }
 
 function renderAll() {
